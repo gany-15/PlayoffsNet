@@ -1,0 +1,184 @@
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+
+    <title>NBA Playground</title>
+    <style>
+      body {
+        overflow: hidden;
+      }
+      #carouselExampleFade {
+        height: 100vh;
+      }
+      .carousel-item img {
+        height: 100%;
+        object-fit: cover;
+      }
+      .logo {
+        z-index: 999;
+        margin-left: 2vw;
+      }
+      .form-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+      .form-group {
+        margin: 1rem 0;
+      }
+      .form-submit {
+        margin-top: 2rem;
+      }
+      .form-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 999;
+      }
+      .card {
+        background-color: rgba(
+          255,
+          255,
+          255,
+          0.8
+        ); /* Set the background color of the card to a transparent white */
+      }
+    </style>
+    <script type="text/javascript" src="/static/JS/teams.js"></script>
+  </head>
+  <body>
+    <!-- NBA Logo -->
+    <div class="logo position-absolute top-0 start-0">
+      <img src="/static/Images/logo.png" alt="NBA Logo" width="80px" height="80px" />
+    </div>
+
+    <!-- Carousel -->
+    <div
+      id="carouselExampleFade"
+      class="carousel slide carousel-fade"
+      data-bs-ride="carousel"
+      data-bs-interval="1500"
+    >
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="/static/Images/background2.jpg" class="d-block w-100" alt="..." />
+        </div>
+        <!-- <div class="carousel-item">
+          <img src="/static/Images/background2.jpg" class="d-block w-100" alt="..." />
+        </div> -->
+        <!-- <div class="carousel-item">
+          <img src="/static/Images/background3.jpg" class="d-block w-100" alt="..." />
+        </div> -->
+      </div>
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#carouselExampleFade"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#carouselExampleFade"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+    <div class="container form-container h-100 w-80">
+      <div class="row h-100 justify-content-center align-items-center">
+        <div class="col-sm-12">
+          <div class="card">
+            <div class="card-header"><h2>Performance Comparison</h2></div>
+              <div class="card-body">
+                <h5 style="text-align: center">Select a team to compare against your team's statistics</h5>
+                <form method="POST" action="/teamCompare">
+                    <!-- <label for="team">Team</label> -->
+                    <select class="form-select" name="team" id="team">
+                        <option selected disabled>Select a team</option>
+                    </select>
+                    <br/>
+                    <input type="submit" value="Compare">
+                </form>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    function updateDropdowns() {
+        // Get all the player dropdowns
+        const dropdowns = document.querySelectorAll("select.form-select");
+
+        // Loop through each dropdown
+        dropdowns.forEach((dropdown) => {
+          // Clear existing options
+          dropdown.innerHTML =
+            "<option selected disabled>Select a team</option>";
+
+          // Add player names as options
+          teams.forEach((team) => {
+            // Check if player has already been selected in another dropdown
+            const selectedTeams = Array.from(dropdowns)
+              .filter((d) => d.value !== "")
+              .map((d) => d.value);
+            if (!selectedTeams.includes(team)) {
+              // Add player name as an option
+              const option = document.createElement("option");
+              option.value = team;
+              option.text = team;
+              dropdown.appendChild(option);
+            }
+          });
+        });
+      }
+
+      // Update dropdown menus when a player is selected
+      document.addEventListener("change", (event) => {
+        // Get the selected player
+        const selectedTeam = event.target.value;
+
+        // Remove selected player from other dropdown menus
+        const dropdowns = document.querySelectorAll("select.form-select");
+        dropdowns.forEach((dropdown) => {
+          if (dropdown !== event.target) {
+            const option = dropdown.querySelector(
+              `option[value="${selectedTeam}"]`
+            );
+            if (option) {
+              option.remove();
+            }
+          }
+        });
+      });
+
+      updateDropdowns();
+  </script>
+  <script>
+    const plQual = document.querySelector('div.result')
+    const resp = document.querySelector('div.resp').innerHTML
+    if (resp == 'False') {
+        plQual.innerHTML = '<h3 style="color: red">Sorry, your team would not qualify for playoffs</h3>'
+    } else {
+        plQual.innerHTML = '<h3 style="color: green">Congratulations! Your team would qualify for the playoffs!</h3>'
+    }
+  </script>
+</html>

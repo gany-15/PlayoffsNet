@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+
+    <title>PlayoffsNet</title>
+    <style>
+      body {
+        overflow: hidden;
+      }
+      #carouselExampleFade {
+        height: 100vh;
+      }
+      .carousel-item img {
+        height: 100%;
+        object-fit: cover;
+      }
+      .logo {
+        z-index: 999;
+        margin-left: 2vw;
+      }
+      .form-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+      .form-group {
+        margin: 1rem 0;
+      }
+      .form-submit {
+        margin-top: 2rem;
+      }
+      .form-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 999;
+      }
+      .card {
+        background-color: rgba(
+          255,
+          255,
+          255,
+          0.4
+        ); /* Set the background color of the card to a transparent white */
+      }
+    </style>
+    <script type="text/javascript" src="/static/JS/team_seas.js"></script>
+  </head>
+  <body>
+    <!-- NBA Logo -->
+    <div class="logo position-absolute top-0 start-0">
+      <img src="/static/Images/logo.png" alt="NBA Logo" width="80px" height="80px" />
+    </div>
+
+    <!-- Carousel -->
+    <div
+      id="carouselExampleFade"
+      class="carousel slide carousel-fade"
+      data-bs-ride="carousel"
+      data-bs-interval="1500"
+    >
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="/static/Images/background1.jpg" class="d-block w-100" alt="..." />
+        </div>
+        <div class="carousel-item">
+          <img src="/static/Images/background2.jpg" class="d-block w-100" alt="..." />
+        </div>
+        <div class="carousel-item">
+          <img src="/static/Images/background3.jpg" class="d-block w-100" alt="..." />
+        </div>
+      </div>
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#carouselExampleFade"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#carouselExampleFade"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+
+    <!-- Player Selection Form -->
+    <div class="container form-container h-100 w-80">
+      <div class="row h-100 justify-content-center align-items-center">
+        <div class="col-sm-12">
+          <div class="card">
+            <div class="card-header"><h2>Player Selection</h2></div>
+            <div class="card-body">
+              <form id="nba-form" method="POST" action="/">
+                <div class="form-group">
+                  <label for="season">Season</label>
+                  <select class="form-select" id="season" name="season">
+                    <option selected disabled>Select a season</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <div class="form-group">
+                    <label for="team">Team</label>
+                    <select class="form-select" id="team" name="team">
+                      <option selected disabled>Select a team</option>
+                    </select>
+                  </div>
+                </div>
+              <input type="submit" value="Submit">
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      // const teams = ['ATL', 'BOS', 'CHI', 'GSW', 'HOU', 'IND', 'LAC', 'LAL', 'NYK', 'WAS']
+      // const seasons = ['2018', '2019', '2020', '2021', '2022']
+
+      populateDropdown = (selectElement, options) => {
+        let dropdown = document.getElementById(selectElement);
+        dropdown.innerHTML = "<option selected disabled>Make a selection</option>";
+        options.forEach(function(option) {
+          let optionElement = document.createElement("option");
+          optionElement.textContent = option;
+          dropdown.appendChild(optionElement);
+        });
+      }
+
+      populateDropdown("team", teams);
+      populateDropdown("season", seasons);
+
+      // document.getElementById("nba-form").addEventListener("submit", (e) => {
+      //   e.preventDefault();
+      //   let selTeam = document.getElementById("team").value;
+      //   let selSeas = document.getElementById("season").value;
+      // });
+    </script>
+  </body>
+</html>
