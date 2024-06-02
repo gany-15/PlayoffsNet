@@ -33,7 +33,7 @@ plotColumns = ['fg', 'fga', 'fg_percent', 'x3p', 'x3pa', 'x3p_percent', 'x2p', '
        'x2p_percent', 'e_fg_percent', 'ft', 'fta', 'orb', 'drb', 'trb', 'ast',
        'stl', 'blk', 'tov', 'pf', 'pts', 'teamChemistry']
 
-@auth.route("/",  methods = ["GET", "POST"])
+@auth.route("/playoffsnet",  methods = ["GET", "POST"])
 def login():
     # print("Here")
     if request.method == "POST":

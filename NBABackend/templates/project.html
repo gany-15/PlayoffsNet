@@ -63,7 +63,12 @@
   <body>
     <!-- NBA Logo -->
     <div class="logo position-absolute top-0 start-0">
-      <img src="./static/Images/logo.png" alt="NBA Logo" width="80px" height="80px" />
+      <img
+        src="/playoffsnet/static/Images/logo.png"
+        alt="NBA Logo"
+        width="80px"
+        height="80px"
+      />
     </div>
 
     <!-- Carousel -->
@@ -75,13 +80,25 @@
     >
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img src="./static/Images/background1.jpg" class="d-block w-100" alt="..." />
+          <img
+            src="/playoffsnet/static/Images/background1.jpg"
+            class="d-block w-100"
+            alt="..."
+          />
         </div>
         <div class="carousel-item">
-          <img src="./static/Images/background2.jpg" class="d-block w-100" alt="..." />
+          <img
+            src="/playoffsnet/static/Images/background2.jpg"
+            class="d-block w-100"
+            alt="..."
+          />
         </div>
         <div class="carousel-item">
-          <img src="./static/Images/background3.jpg" class="d-block w-100" alt="..." />
+          <img
+            src="/playoffsnet/static/Images/background3.jpg"
+            class="d-block w-100"
+            alt="..."
+          />
         </div>
       </div>
       <button
@@ -111,7 +128,7 @@
           <div class="card">
             <div class="card-header"><h2>Player Selection</h2></div>
             <div class="card-body">
-              <form id="nba-form" method="POST" action="/">
+              <form id="nba-form" method="POST" action="/playoffsnet">
                 <div class="form-group">
                   <label for="season">Season</label>
                   <select class="form-select" id="season" name="season">
@@ -126,7 +143,7 @@
                     </select>
                   </div>
                 </div>
-              <input type="submit" value="Submit">
+                <input type="submit" value="Submit" />
               </form>
             </div>
           </div>
@@ -140,18 +157,30 @@
       crossorigin="anonymous"
     ></script>
     <script>
-      const teams = ['ATL', 'BOS', 'CHI', 'GSW', 'HOU', 'IND', 'LAC', 'LAL', 'NYK', 'WAS']
-      const seasons = ['2018', '2019', '2020', '2021', '2022']
+      const teams = [
+        "ATL",
+        "BOS",
+        "CHI",
+        "GSW",
+        "HOU",
+        "IND",
+        "LAC",
+        "LAL",
+        "NYK",
+        "WAS",
+      ];
+      const seasons = ["2018", "2019", "2020", "2021", "2022"];
 
       populateDropdown = (selectElement, options) => {
         let dropdown = document.getElementById(selectElement);
-        dropdown.innerHTML = "<option selected disabled>Make a selection</option>";
-        options.forEach(function(option) {
+        dropdown.innerHTML =
+          "<option selected disabled>Make a selection</option>";
+        options.forEach(function (option) {
           let optionElement = document.createElement("option");
           optionElement.textContent = option;
           dropdown.appendChild(optionElement);
         });
-      }
+      };
 
       populateDropdown("team", teams);
       populateDropdown("season", seasons);
